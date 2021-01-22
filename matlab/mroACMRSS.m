@@ -9,7 +9,7 @@ classdef mroACMRSS<mroACM
         function this=mroACMRSS(s,n,js)
             %the class expects a 3D matrix composed by a tile of 2D kspaces (fxpxncoils) of a signal and a
             %noise.
-            
+            this.setTypeOutput('RSS')
             this.setImageReconstructor(cm2DReconRSS);
             this.setSNRUnitReconstructor(cm2DKellmanRSS);
             

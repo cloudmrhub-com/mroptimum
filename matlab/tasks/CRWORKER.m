@@ -1,4 +1,4 @@
-function [O,NEEDCLASS]=ACMWORKER(KSS,KSN,o,KSENS,FA,ontheclass)
+function [O,NEEDCLASS]=CRWORKER(KSS,KSN,o,KSENS,FA,ontheclass)
 %BIDIMENSIONAL KSPACE signal (freq,phase,ncoils), noise(freq,phase,ncoils), optionfiles, sensitivitykspace (freq,phase,ncoils),
 %FA map (freq,phase)
 %ACMWORKER(KSS,KSN,o,KSS,FA,'you can do it baby!') %if KSS is the same as KSENS
@@ -10,9 +10,16 @@ function [O,NEEDCLASS]=ACMWORKER(KSS,KSN,o,KSENS,FA,ontheclass)
 
 
 [NEEDCLASS]=taskcreateneededclass(o,KSN,KSENS,KSS,ontheclass);
+
+
+PMR=mroPMR(NEEDCLASS,o);
+
+
+
 try
-    O.SNR=NEEDCLASS.getSNR();
-    NEEDCLASS.logIt(['SNR calc'],'ok');
+    
+    [O.SNR, O.STD]=PMR.getSNR();
+     NEEDCLASS.logIt(['SNR calc'],'ok');
 catch
     NEEDCLASS.logIt(['problem with snr calc'],'ko');
 end
@@ -59,6 +66,7 @@ else
     NEEDCLASS.logIt(['problem with FA'],'ko');
     
 end
+
 
 
 

@@ -12,10 +12,11 @@ classdef mroACMSENSE<mroACM
         function this=mroACMSENSE(s,n,js)
             %the class expects a 3D matrix composed by a tile of 2D kspaces (fxpxncoils) of a signal and a
             %noise.
-            
+            this.setTypeOutput('mSENSE')
             this.setImageReconstructor(cm2DReconSENSE());
             this.setSNRUnitReconstructor(cm2DKellmanSENSE());
             this.Others.GFactorReconstructor=cm2DGFactorSENSE();
+            this.Config.GFactorFlag=1; %clculate the GFactor;
             
             if nargin>0
                 this.setSignalKSpace(s);
@@ -81,7 +82,7 @@ classdef mroACMSENSE<mroACM
             end
             
             
-            this.Config.GFactor=1;
+        
             
             
             
@@ -103,7 +104,7 @@ classdef mroACMSENSE<mroACM
             O.AccelerationF = this.Config.AccelerationF;
             O.AccelerationP = this.Config.AccelerationP;
             
-            O.GFactorMask =this.GFactorMaskID;
+            O.GFactorMask =this.Config.GFactorMaskID;
             O.Autocalibration=this.Config.Autocalibration;
             
         end
@@ -114,8 +115,15 @@ classdef mroACMSENSE<mroACM
             O=R.mimicmSenseDataFromFullysampledZeroPadded(K,R.getAccelerationFrequency(),R.getAccelerationPhase(),R.getAutocalibration());
         end
         
+        function setGfactorFlag(this,f)
+            %zero or false won't calculate the output
+            this.Config.GFactorFlag=f;
+        end
         
-        
+         function o=getGfactorFlag(this)
+            %zero or false won't calculate the output
+            o=this.Config.GFactorFlag;
+        end
         
     end
 end

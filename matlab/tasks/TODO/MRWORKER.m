@@ -1,45 +1,38 @@
 function [O,OUTPUTCLASS]=MRWORKER(imageReplicas,OUTPUTCLASS)
 %imageReplicas of 2Dimages (x,y,z,nrep)  OUTPUTCLASS
-%MRWORKER(SS,FA,'you can do it baby!') 
-%OUT.SNR
-%OUT.SNRFA
+%MRWORKER(SS,FA) 
 %v25022020
 
 
 
 try
 
-O.MR=[];
 for sl=1:size(imageReplicas,3) %for every slice
-    for rep=1:size(imageReplicas,4)
-        IM=squeeze(imageReplicas(:,:,sl,rep));
-        O.MR=cat(1,O.MR, {CLOUDMR2DMR()});
-         O.MR{sl}.add2DImage(double(IM)); 
-    end
-          O.SNR(:,:,sl)=O.MR{sl}.getSNR();
-            O.STD(:,:,sl)=O.MR{sl}.getSTD();
-            O.MEAN(:,:,sl)=O.MR{sl}.getMEAN();
+  
+        IM=squeeze(imageReplicas(:,:,sl,:));
+        MR=cm2DSignalToNoiseRatioMultipleReplicas(IM);
+        O.SNR(:,:,sl)=MR.getSNR();
+        O.STD(:,:,sl)=MR.getSTD();
+        O.MEAN(:,:,sl)=MR.getMEAN();
 end
 
-    OUTPUTCLASS.addToExporter('image2D','SNR Map',fixalo____qui(O.SNR));
-    OUTPUTCLASS.addToExporter('image2D','Mean Image ',fixalo____qui(O.MEAN));
-    OUTPUTCLASS.addToExporter('image2D','Std Image',fixalo____qui(O.STD));
-    
-    
-    
-    
+ 
+        
 catch
     
 end
+
+   OUTPUTCLASS.add2DImagetoExport(fixalo____qui(O.SNR),'SNR Map');
+    OUTPUTCLASS.add2DImagetoExport(fixalo____qui(O.MEAN),'Mean Image');
+    OUTPUTCLASS.add2DImagetoExport(fixalo____qui(O.STD),'Std Image');
 
 %write results (Exporter)
     OUTPUTCLASS.exportResults();
    
 %export log
-    OUTPUTCLASS.logIT('stop calculation','stop');
-    OUTPUTCLASS.exportLOG();
-    
-    
+    OUTPUTCLASS.logIt('stop calculation','stop');
+    OUTPUTCLASS.exportLog();
+       
     
     
 

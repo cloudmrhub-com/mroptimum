@@ -12,7 +12,7 @@ classdef mroACMGRAPPA<mroACM
         function this=mroACMGRAPPA(s,n,js)
             %the class expects a 3D matrix composed by a tile of 2D kspaces (fxpxncoils) of a signal and a
             %noise.
-            
+            this.setTypeOutput('GRAPPA')
             this.setImageReconstructor(cm2DReconGRAPPA());
             
             if nargin>0

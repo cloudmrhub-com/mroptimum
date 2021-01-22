@@ -1,4 +1,4 @@
-function OUTCLASS=  ACMtask(signalfilename,noisefilename,jop,resultfilename,logfilename,QSRVR)
+function OUTCLASS=  CRtask(signalfilename,noisefilename,jop,resultfilename,logfilename,QSRVR)
 warning('off');
 
 
@@ -44,20 +44,23 @@ try
             KSENS=[];
         end
         
-        [O(sl),L(sl)]=ACMWORKER(KSS,KSN,o,KSENS,FA,['slice number # ' num2str(sl)]);
+        [O(sl),L(sl)]=CRWORKER(KSS,KSN,o,KSENS,FA,['slice number # ' num2str(sl)]);
         %update the main class
         OUTCLASS.appendLog(L(sl).getLog());
         
         
     end
     
-    %% Time to gather the results
+    %% Ttime togather the results
     
-  [SNR,SNRFA,GF,UGF,SENSITIVITIES,STD]=taskgatherdata(O);
-    
-    
-    
-    %% export the results
+      [SNR,SNRFA,GF,UGF,SENSITIVITIES,STD]=taskgatherdata(O)
+   
+
+   
+  
+               %% export the results
+
+  
     
     if(isfield(O,'SNR'))
         OUTCLASS.add2DImagetoExport(SNR,'SNR Map');
@@ -85,7 +88,10 @@ try
             end
         end
     end
-    
+              if(isfield(O,'STD'))
+              OUTCLASS.add2DImagetoExport(STD,'STD Image');
+
+          end
     OUTCLASS.add2DImagetoExport(L(1).getNoiseCovariance(),'Noise Covariance');
     OUTCLASS.add2DImagetoExport(L(1).getNoiseCoefficients(),'Noise Coefficients');
     %write results (Exporter)
@@ -94,12 +100,14 @@ try
     %export log
     OUTCLASS.logIt('stop calculation','stop');
     OUTCLASS.exportLog(logfilename);
-    
+          
+          
+
     fprintf(1,'done!\n\n');
 catch
     
     if ~exist('OUTCLASS','var')
-        OUTCLASS=cmOutput();
+        OUTCLASS=CLOUDMROutput();
     end
     OUTCLASS.outputError(logfilename);
     
@@ -111,4 +119,7 @@ end
 end
 
 
-
+function O=fixalo____qui(O)
+    O(isnan(O))=0;
+    O(isinf(O))=0;
+end

@@ -10,6 +10,8 @@ classdef mroACMB1<mroACM
             %the class expects a 3D matrix composed by a tile of 2D kspaces (fxpxncoils) of a signal and a
             %noise.
             
+            this.setTypeOutput('B1')
+            
             this.setImageReconstructor(cm2DReconB1);
             this.setSNRUnitReconstructor(cm2DKellmanB1);
             
@@ -27,6 +29,7 @@ classdef mroACMB1<mroACM
             
         end
         function setConf(this,js)
+            
             
             this.Config.Type=js.Type;
             
