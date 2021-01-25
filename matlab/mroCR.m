@@ -1,7 +1,8 @@
 classdef mroCR<mroPMR
     
-    properties        
-      Filter=cm2DSignalToNoiseRatioPseudoMultipleReplicasWien()
+    properties(Access=protected)        
+     DFTNR=2; %default numberof replicas
+     DFTBB=3; %default number bounding box size
     end
     
     
@@ -9,6 +10,7 @@ classdef mroCR<mroPMR
     
               %constructor
         function this=mroCR(RE,js)
+             this.Filter=cm2DSignalToNoiseRatioPseudoMultipleReplicasWien();
             %the class expects a Reconstructor class
             if (nargin>0)
                 
@@ -16,8 +18,8 @@ classdef mroCR<mroPMR
                 if(RE.hasGFactor())
                 RE.setGfactorFlag(0);
                 end
-                this.Config.NR=100;
-                this.BoxSize=3;
+                this.Filter.setNumberOfPseudoReplicas(this.DFTNR); %default
+                this.Filter.setBoxSize(this.DFTBB);
             
                 this.setImageReconstructor(RE);
             end

@@ -1,4 +1,4 @@
-function OUTPUTCLASS=  MRtask(signalfilename,noisefilename,jop,resultfilename,logfilename,QSRVR)
+function theimagestack=  RECONtask(signalfilename,noisefilename,jop,resultfilename,logfilename,QSRVR)
 %signal name its an array of data
 %v25022020
 warning('off');
@@ -9,7 +9,6 @@ try
 catch
     TMP=pwd;
 end
-
 %this will bethe output class
 OUTPUTCLASS=cmOutput();
 OUTPUTCLASS.setTypeOutput('MR');
@@ -109,10 +108,10 @@ try
         end
     end
     
-    OUTPUTCLASS.setOutputFileName(resultfilename);
-    OUTPUTCLASS.setOutputLogFileName(logfilename);
+    %OUTPUTCLASS.setOutputFileName(resultfilename);
+    %OUTPUTCLASS.setOutputLogFileName(logfilename);
     
-    [O,OUTPUTCLASS]=MRWORKER(theimagestack,OUTPUTCLASS);
+   % OUTPUTCLASS.add2DImagetoExport()
     
     %data are exported inside the worer
     

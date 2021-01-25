@@ -3,9 +3,11 @@ warning('off');
 
 
 
-
+try
 [TMP,~,~]=fileparts(resultfilename);
-
+catch
+    TMP=pwd;
+end
 try
     %%read options and instantiate the output class
     
@@ -60,14 +62,16 @@ try
   
                %% export the results
 
-   
+ 
+
   
     
     if(isfield(O,'SNR'))
         OUTCLASS.add2DImagetoExport(SNR,'SNR Map');
         
     end
-    
+          if(~isempty(resultfilename))
+              
     if(isfield(O,'SNRFA'))
         OUTCLASS.add2DImagetoExport(SNRFA,'SNR FA');
     end
@@ -103,13 +107,13 @@ try
     OUTCLASS.logIt('stop calculation','stop');
     OUTCLASS.exportLog(logfilename);
           
-          
+       end
 
     fprintf(1,'done!\n\n');
 catch
     
     if ~exist('OUTCLASS','var')
-        OUTCLASS=CLOUDMROutput();
+        OUTCLASS=cmOutput();
     end
     OUTCLASS.outputError(logfilename);
     

@@ -12,13 +12,13 @@ function [O,NEEDCLASS]=CRWORKER(KSS,KSN,o,KSENS,FA,ontheclass)
 [NEEDCLASS]=taskcreateneededclass(o,KSN,KSENS,KSS,ontheclass);
 
 
-PMR=mroPMR(NEEDCLASS,o);
+CR=mroCR(NEEDCLASS,o);
 
 
 
 try
     
-    [O.SNR, O.STD]=PMR.getSNR();
+    [O.SNR, O.STD]=CR.getSNR();
      NEEDCLASS.logIt(['SNR calc'],'ok');
 catch
     NEEDCLASS.logIt(['problem with snr calc'],'ko');

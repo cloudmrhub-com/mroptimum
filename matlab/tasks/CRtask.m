@@ -2,10 +2,11 @@ function OUTCLASS=  CRtask(signalfilename,noisefilename,jop,resultfilename,logfi
 warning('off');
 
 
-
-
+try
 [TMP,~,~]=fileparts(resultfilename);
-
+catch
+    TMP=pwd;
+end
 try
     %%read options and instantiate the output class
     
@@ -53,12 +54,13 @@ try
     
     %% Ttime togather the results
     
-      [SNR,SNRFA,GF,UGF,SENSITIVITIES,STD]=taskgatherdata(O)
+      [SNR,SNRFA,GF,UGF,SENSITIVITIES,STD]=taskgatherdata(O);
    
 
    
   
                %% export the results
+
 
   
     
@@ -66,7 +68,7 @@ try
         OUTCLASS.add2DImagetoExport(SNR,'SNR Map');
         
     end
-    
+        if(~isempty(resultfilename))
     if(isfield(O,'SNRFA'))
         OUTCLASS.add2DImagetoExport(SNRFA,'SNR FA');
     end
@@ -101,13 +103,13 @@ try
     OUTCLASS.logIt('stop calculation','stop');
     OUTCLASS.exportLog(logfilename);
           
-          
+    end
 
     fprintf(1,'done!\n\n');
 catch
     
     if ~exist('OUTCLASS','var')
-        OUTCLASS=CLOUDMROutput();
+        OUTCLASS=cmOutput();
     end
     OUTCLASS.outputError(logfilename);
     

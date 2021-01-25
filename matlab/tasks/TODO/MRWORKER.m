@@ -12,8 +12,8 @@ for sl=1:size(imageReplicas,3) %for every slice
         IM=squeeze(imageReplicas(:,:,sl,:));
         MR=cm2DSignalToNoiseRatioMultipleReplicas(IM);
         O.SNR(:,:,sl)=MR.getSNR();
-        O.STD(:,:,sl)=MR.getSTD();
-        O.MEAN(:,:,sl)=MR.getMEAN();
+        O.STD(:,:,sl)=MR.getImageArraySTD();
+        O.MEAN(:,:,sl)=MR.getImageArrayMEAN();
 end
 
  
