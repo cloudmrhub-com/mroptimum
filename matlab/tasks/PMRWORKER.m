@@ -16,6 +16,7 @@ PMR=mroPMR(NEEDCLASS,o);
 
 
 
+
 try
     
     [O.SNR, O.STD]=PMR.getSNR();

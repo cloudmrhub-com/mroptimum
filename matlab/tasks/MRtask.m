@@ -116,7 +116,7 @@ try
     
     %data are exported inside the worer
     
-    fprintf(1,'done!\n\n');
+    fprintf(1,'done!');
 catch
     
     if ~exist('OUTCLASS','var')

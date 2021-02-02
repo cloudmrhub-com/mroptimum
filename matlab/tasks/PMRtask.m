@@ -109,7 +109,7 @@ try
           
        end
 
-    fprintf(1,'done!\n\n');
+    fprintf(1,'done!');
 catch
     
     if ~exist('OUTCLASS','var')

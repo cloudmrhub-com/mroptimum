@@ -43,7 +43,11 @@ SOURCESENS=[];
         case {'noiseFile'} %otherwise we provide an image
            % 
                    if ischar(noisefilename)
-            KN.setFilename(noisefilename);
+
+                       
+                           KN.setIsSignalFile(0);
+
+                       KN.setFilename(noisefilename);
            ln='user set that the noise map should be in a separated file';
 
         else

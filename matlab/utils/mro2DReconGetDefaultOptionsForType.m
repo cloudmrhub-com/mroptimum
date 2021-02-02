@@ -34,8 +34,8 @@ if nargin>0
             o.AccelerationP=2;
             o.AutocalibrationF=32;
             o.AutocalibrationP=32;
-            o.GrappaKernel1=5
-            o.GrappaKernel2=4
+            o.GrappaKernel1=5;
+            o.GrappaKernel2=4;
             o.SoSRecon=0;
     end
     

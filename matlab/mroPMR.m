@@ -4,7 +4,7 @@ classdef mroPMR<cmOutput
       ImageReconstructor
       Config
       Others
-      Filter=cm2DSignalToNoiseRatioPseudoMultipleReplicas();
+      Filter
     end
     
     
@@ -13,6 +13,7 @@ classdef mroPMR<cmOutput
               %constructor
         function this=mroPMR(RE,js)
             %the class expects a Reconstructor class
+             this.Filter=cm2DSignalToNoiseRatioPseudoMultipleReplicas();
             if (nargin>0)
                 
                 if(RE.hasGFactor())
