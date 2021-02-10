@@ -5,8 +5,8 @@ r=find(roi);
 else
     r=index;
 end
-vim1=im1(r);
-vim2=im2(r);
+vim1=abs(im1(r));
+vim2=abs(im2(r));
 
 SNR=nanmean(vim1+vim2)./(sqrt(2)*nanstd(vim1-vim2));
 

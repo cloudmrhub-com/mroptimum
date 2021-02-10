@@ -124,8 +124,12 @@ try;            this.SNRUnitReconstructor.setNoiseKSpace(K);end; %not every reco
         function setCoilSensitivityMatrix(this,S)
             R=this.getImageReconstructor();
             R.setCoilSensitivityMatrixSource(S);
+try
             RS=this.getSNRUnitReconstructor();
             RS.setCoilSensitivityMatrixSource(S);
+catch
+    this.logIt(['NO Kellmn REconstrucor for  ' class(this)]);
+end
         end
         
         

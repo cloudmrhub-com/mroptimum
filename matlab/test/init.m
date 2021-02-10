@@ -4,7 +4,7 @@ addpath(genpath('/data/PROJECTS/CLOUDMR/CODE/CMRCode/matlab'))
 addpath(genpath('/data/PROJECTS/MROPTIMUM/CODE/MROCode/matlab'))
 
 
-
+addpath(genpath('./'))
 
 
 PT='/data/MYDATA/TestSNR_15Apr2019_multislice/RAWDATA';

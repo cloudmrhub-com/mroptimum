@@ -17,11 +17,8 @@ if nargin>0
              L=mroACMB1();
         case 'grappa'
             L=mroACMGRAPPA();
-%         case 'adapt'
-%             L=cm2DReconAdapt();
-%         otherwise
-%             L=cm2DRecon();
-            
+        case 'espirit'
+            L=mroACMESPIRiT();            
     end
     
     

@@ -37,6 +37,15 @@ if nargin>0
             o.GrappaKernel1=5;
             o.GrappaKernel2=4;
             o.SoSRecon=0;
+      case {'espirit'}
+               o.Type='espirit';
+            o.SensitivityCalculationMethod='simplesense';
+            o.SourceCoilSensitivityMap='self';
+            o.SaveCoils=false;
+            o.SourceCoilSensitivityMapSmooth=false;
+            o.AccelerationF=1;
+            o.AccelerationP=2;
+            o.Autocalibration=32;
     end
     
     

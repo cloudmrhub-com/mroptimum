@@ -1,4 +1,4 @@
-classdef mroACMESPIRit<mroACM
+classdef mroACMESPIRiT<mroACM
     
     properties
         
@@ -41,10 +41,8 @@ classdef mroACMESPIRit<mroACM
             this.Config.SensitivityCalculationMethod=js.SensitivityCalculationMethod;
             
             R=this.getImageReconstructor();
-            RS=this.getSNRUnitReconstructor();
             R.setCoilSensitivityMatrixCalculationMethod(js.SensitivityCalculationMethod);
-            RS.setCoilSensitivityMatrixCalculationMethod(js.SensitivityCalculationMethod);
-            this.Others.GFactorReconstructor.setCoilSensitivityMatrixCalculationMethod(js.SensitivityCalculationMethod);
+
             %i don't want to take the matlab image but it's id o the db
             this.Config.SourceCoilSensitivityMapID=js.SourceCoilSensitivityMap;
             
@@ -52,8 +50,6 @@ classdef mroACMESPIRit<mroACM
             
             this.Config.SourceCoilSensitivityMapSmooth=js.SourceCoilSensitivityMapSmooth;
             R.setCoilSensitivityMatrixSourceSmooth(js.SourceCoilSensitivityMapSmooth);
-            RS.setCoilSensitivityMatrixSourceSmooth(js.SourceCoilSensitivityMapSmooth);
-             this.Others.GFactorReconstructor.setCoilSensitivityMatrixSourceSmooth(js.SourceCoilSensitivityMapSmooth);
             
             this.Config.AccelerationF = js.AccelerationF;
             this.Config.AccelerationP = js.AccelerationP;
@@ -63,10 +59,7 @@ classdef mroACMESPIRit<mroACM
             R.setAccelerationPhase(js.AccelerationP);
             R.setAutocalibration(js.Autocalibration);
             
-            RS.setAccelerationFrequency(js.AccelerationF);
-            RS.setAccelerationPhase(js.AccelerationP);
-            RS.setAutocalibration(js.Autocalibration);
-            
+         
     
              
     
