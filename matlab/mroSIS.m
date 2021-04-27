@@ -17,8 +17,9 @@ if ~exist('type','var')
     type=1;
 end
 
+sr=size(roi);
 %check if this are indexes or masks
-if numel(size(roi))>1
+if numel(sr)>1 && sr(2)>1 
     r=find(roi);
 else
     r=roi;
@@ -26,20 +27,20 @@ end
 
 %background roi counter
 
-im=abs(im);
+%im=abs(im);
 S=nanmean(im(r));
 
 switch (type)
     case 1
-N=SISsmoothedImage(im,r,k);
+noiseimage=SISsmoothedImage(im,k);
     case {2}
-N=SISsmoothedImageMeanconvolution(im,r,k);
+noiseimage=SISsmoothedImageMeanconvolution(im,k);
 end
 %no correction apperently
 correction=1;
 
-SNR=correction*S/nanmean(N);
-
+N=nanstd(noiseimage(r));
+SNR=correction*S/N;
 
 end
 

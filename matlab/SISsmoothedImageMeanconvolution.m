@@ -1,16 +1,17 @@
-function N=SISsmoothedImageMeanconvolution(im,r,k)
+function [noiseimage, smoothedimage]=SISsmoothedImageMeanconvolution(im,k)
 %N=SISsmoothedImage(im,r,k)
 %image is a 2d image, r is an array of indexes k is the box side
 im=double(im);
 %pad the image
 
- kernel = ones(k)/(K^2); % Create averaging window.
+h = fspecial('average',(2*k)+1);
 
- smoothedimage = conv2(im, kernel, 'same'); % Get means. 
-  
- noise=im-smoothedimage;
+ for s=1:size(im,3)
+ smoothedimage(:,:,s) = imfilter(im(:,:,s), h, 'replicate'); % Get means. 
+ end
  
-N=nanstd(noise(r));
+ noiseimage=im-smoothedimage;
+ 
  
  
  

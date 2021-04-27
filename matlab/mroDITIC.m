@@ -19,7 +19,7 @@ vim2=reshape(im2(r),[],1);
 
 S=nanmean(nanmean(cat(2,vim1,vim2),2));
 
-N=marksDiffenceofPixels(im1,im2,r);
+N=marksDiffenceOfPixels(im1,im2,r);
 
 SNR=sqrt(2)*S/N;
 
