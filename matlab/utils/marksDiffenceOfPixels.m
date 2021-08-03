@@ -17,15 +17,19 @@ p_markDistance(:,1:markDistance(2))=[];
 
 %for all indexes
 N1=0;
-
+c=0;
 for p=1:numel(r)
         theindex=r(p);
         [I,J] = ind2sub(imsize,theindex);
+        try
         n=((N(I+markDistance(1),J+markDistance(2))-N(I,J))^2);
         if(~isnan(n))
             N1=N1+n;
+            c=c+1;
+        end
+        catch
         end
 end
         
-N2=2*numel(r);
+N2=2*c;
 N=sqrt(N1/N2);
