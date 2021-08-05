@@ -4,7 +4,6 @@ classdef CLOUDMR2DDI<cmOutput
     properties
         image0
         image1        
-        Type='DI'
     end
     
     
@@ -13,7 +12,7 @@ classdef CLOUDMR2DDI<cmOutput
     methods
         function this = CLOUDMR2DDI(s0,s1)
             this.logIt('instantiate the class DI','ok')
-            
+            this.setTypeOutput('DI')
             if nargin>0
                 try
                     this.setImage0(s0);
