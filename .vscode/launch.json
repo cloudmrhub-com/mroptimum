@@ -1,0 +1,60 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "generateAnalitical",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": ["-d","2","-t","analitical","-r","sense","-j","/g/as.json","-s",
+                    "/data/PROJECTS/cloudmrhub/cloudmrhub/data/meas_MID00024_FID188178_Multislice.dat",
+                    "-n","/data/PROJECTS/cloudmrhub/cloudmrhub/data/meas_MID00027_FID188181_Multislice_no_RF.dat"
+                ]
+        },
+        //         {
+        //             "name": "generate",
+        //             "type": "python",
+        //             "request": "launch",
+        //             "program": "${file}",
+        //             "console": "integratedTerminal",
+        //             "justMyCode": true,
+        //             "args": ["-d","2","-t","analitical","-r","sense","-j","/g/as.json","-s",
+        //             "/data/PROJECTS/cloudmrhub/cloudmrhub/data/meas_MID00024_FID188178_Multislice.dat",
+        //             "-n","/data/PROJECTS/cloudmrhub/cloudmrhub/data/meas_MID00027_FID188181_Multislice_no_RF.dat"
+        //         ]
+        //         },
+        //         {
+        //             "name": "snrpmr",
+        //             "type": "python",
+        //             "request": "launch",
+        //             "program": "${file}",
+        //             "console": "integratedTerminal",
+        //             "justMyCode": true,
+        //             "args": ["-j","/g/as3.json","-o","/g/_MR/","-c","True","-g","True"]
+        //         }
+        //  ,
+        {
+            "name": "snranalitical",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "-j",
+                "/g/as.json",
+                "-o",
+                "/g/_MR_/",
+                "-c",
+                "True",
+                "-g",
+                "True"
+            ]
+        }
+    ]
+}

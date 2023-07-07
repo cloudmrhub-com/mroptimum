@@ -1,0 +1,8 @@
+*.mha
+*.mhd
+*~
+*pyc
+MRO/
+docs/
+dist/
+mroptimum/dev*
