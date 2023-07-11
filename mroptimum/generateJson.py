@@ -155,7 +155,7 @@ def generateKellman(fn=None,reconstructor=None,J0=None):
     J={
         "type":"SNR",
         "id":0,
-        "name":"Analitical",
+        "name":"AC",
         "options":{
             "reconstructor":reconstructor,
         }
@@ -239,17 +239,16 @@ if __name__=="__main__":
 
 
     parser.add_argument('-t','--typeofsnr', choices=SNR,type=str, help='type of snr')
-    parser.add_argument('-d','--dim', choices=[2,3],type=int, help='kspace acquisition dimension')
+    parser.add_argument('-a','--acquisition', choices=[2,3],type=int, help='kspace acquisition dimension',default=2)
     parser.add_argument('-r','--reconstructions', choices=RECON,type=str, help='type of trteconstructions')
-    parser.add_argument('-s','--signal',type=str, help='type of trteconstructions')
-    parser.add_argument('-n','--noise', type=str, help='type of trteconstructions')
+    parser.add_argument('-s','--signal',type=str, help='signal file')
+    parser.add_argument('-n','--noise', type=str, help='noise file')
     parser.add_argument('-j','--joptions', type=str, help='optionfile with the backbone of the calculation that will be written')
+    parser.add_argument('-m','--multiraid', type=bool, help='Are Data multiraid',default=False)
     args = parser.parse_args()
 
-    print(args)
-
     J={"version":"v0",
-       "dimension":args.dim
+       "acquisition":args.acquisition
        }
 
     # reconstructor index
@@ -262,6 +261,7 @@ if __name__=="__main__":
     SID=SNR.index(args.typeofsnr)
     # reconstruction function
     SF=SNR_f[SID]
+    pn.Pathable(args.joptions).ensureDirectoryExistence()
     SF(fn=args.joptions,reconstructor=RF(fn=None,signal=args.signal,noise=args.noise),J0=J)
     print(f"option file correctly written in {args.joptions} for a ", SF.__name__.replace('generate',''), "SNR and ", RF.__name__, "reconstructor")
 

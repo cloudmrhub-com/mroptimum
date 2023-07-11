@@ -10,34 +10,52 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "justMyCode": true,
-            "args": ["-d","2","-t","analitical","-r","sense","-j","/g/as.json","-s",
+            "justMyCode": false,
+            "args": ["-a","2","-t","ac","-r","msense","-j","/g/mroptimumcollections/acmsense.json","-s",
                     "/data/PROJECTS/cloudmrhub/cloudmrhub/data/meas_MID00024_FID188178_Multislice.dat",
                     "-n","/data/PROJECTS/cloudmrhub/cloudmrhub/data/meas_MID00027_FID188181_Multislice_no_RF.dat"
                 ]
         },
-        //         {
-        //             "name": "generate",
-        //             "type": "python",
-        //             "request": "launch",
-        //             "program": "${file}",
-        //             "console": "integratedTerminal",
-        //             "justMyCode": true,
-        //             "args": ["-d","2","-t","analitical","-r","sense","-j","/g/as.json","-s",
-        //             "/data/PROJECTS/cloudmrhub/cloudmrhub/data/meas_MID00024_FID188178_Multislice.dat",
-        //             "-n","/data/PROJECTS/cloudmrhub/cloudmrhub/data/meas_MID00027_FID188181_Multislice_no_RF.dat"
-        //         ]
-        //         },
-        //         {
-        //             "name": "snrpmr",
-        //             "type": "python",
-        //             "request": "launch",
-        //             "program": "${file}",
-        //             "console": "integratedTerminal",
-        //             "justMyCode": true,
-        //             "args": ["-j","/g/as3.json","-o","/g/_MR/","-c","True","-g","True"]
-        //         }
-        //  ,
+                {
+                    "name": "generate",
+                    "type": "python",
+                    "request": "launch",
+                    "program": "${file}",
+                    "console": "integratedTerminal",
+                    "justMyCode": true,
+                    "args": ["-d","2","-t","analitical","-r","sense","-j","/g/as.json","-s",
+                    "/data/PROJECTS/cloudmrhub/cloudmrhub/data/meas_MID00024_FID188178_Multislice.dat",
+                    "-n","/data/PROJECTS/cloudmrhub/cloudmrhub/data/meas_MID00027_FID188181_Multislice_no_RF.dat"
+                ]
+                },
+                {
+                    "name": "snrpmrmSense",
+                    "type": "python",
+                    "request": "launch",
+                    "program": "${file}",
+                    "console": "integratedTerminal",
+                    "justMyCode": true,
+                    "args": ["-j","/g/mroptimumcollections/pmrmsense.json","-o","/g/_MR/","-c","True","-g","True","-v","True","-m","True"]
+                },
+                {
+                    "name": "snrcrSense",
+                    "type": "python",
+                    "request": "launch",
+                    "program": "${file}",
+                    "console": "integratedTerminal",
+                    "justMyCode": true,
+                    "args": ["-j","/g/mroptimumcollections/crmsense.json","-o","/g/_MR/","-c","True","-g","True","-v","False","-m","False"]
+                },
+                {
+                    "name": "snrpmrmGrappa",
+                    "type": "python",
+                    "request": "launch",
+                    "program": "${file}",
+                    "console": "integratedTerminal",
+                    "justMyCode": true,
+                    "args": ["-j","/g/mroptimumcollections/pmrgrappa.json","-o","/g/_MR/","-c","True","-g","True","-v","True","-m","True"]
+                }
+         ,
         {
             "name": "snranalitical",
             "type": "python",
@@ -47,13 +65,37 @@
             "justMyCode": true,
             "args": [
                 "-j",
-                "/g/as.json",
+                "/g/mroptimumcollections/acmsense.json",
                 "-o",
-                "/g/_MR_/",
+                "/g/_MR_msense/",
                 "-c",
                 "True",
                 "-g",
+                "True",
+                "-m",
                 "True"
+
+            ]
+        },
+        {
+            "name": "snranaliticalmultiraid",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "-j",
+                "/g/mroptimumcollections/acmsense_multiraid.json",
+                "-o",
+                "/g/_MR_msense_multiraid/",
+                "-c",
+                "True",
+                "-g",
+                "True",
+                "-m",
+                "True"
+
             ]
         }
     ]

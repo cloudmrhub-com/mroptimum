@@ -4,18 +4,20 @@ import multiprocessing as mlp
 from pynico_eros_montin import pynico as pn
 
 
-def saveImage(x,origin,spacing,direction,fn):
-    x.setImageDirection(direction)
-    x.setImageSpacing(spacing)
-    x.setImageOrigin(origin)
-    
+def saveImage(x,origin=None,spacing=None,direction=None,fn=None):
+    if not(direction is None):
+        x.setImageDirection(direction)
+    if not(spacing  is None):
+        x.setImageSpacing(spacing)
+    if not(direction  is None):
+        x.setImageOrigin(origin)
     x.writeImageAs(fn)
 
 
 
 RECON=["rss","b1","sense","msense","grappa"]
 KELLMAN=[cm2DKellmanRSS,cm2DKellmanB1,cm2DKellmanSense,cm2DKellmanmSense,None]
-SNR=["analitical","mr","pmr","cr"]
+SNR=["ac","mr","pmr","cr"]
 
 
 def undersample(K,recon):
@@ -26,6 +28,18 @@ def undersample(K,recon):
         return cm.undersample2DDatamSENSE(K, frequencyacceleration=recon["options"]["accelerations"][0],phaseacceleration=recon["options"]["accelerations"][1],phaseACL=recon["options"]["acl"][1]),True
     if N=="grappa":
         return cm.undersample2DDatamGRAPPA(K, frequencyacceleration=recon["options"]["accelerations"][0],phaseacceleration=recon["options"]["accelerations"][1],frequencyACL=recon["options"]["acl"][0],phaseACL=recon["options"]["acl"][1]),True
+
+
+
+class manalitical:
+    def __init__(self,reconstructor,counter=0) -> None:
+        self.reconstructor=reconstructor
+        self.counter=counter
+
+    
+    def getOutput(self):
+        return self.reconstructor.getOutput(),self.counter
+
 
 class mreplicas:
     def __init__(self,reconstructor,snrmethod,NR=None,boxsize=None,counter=0) -> None:
@@ -51,10 +65,7 @@ def replicas(reconstructor,snrmethod,NR=None,boxsize=None):
     return O
 
 def rT(t,counter=None):
-    if counter:
-        return t.getOutput(), counter
-    else:
-        return t.getOutput()
+    return t.getOutput()
 
 
 import boto3
@@ -86,10 +97,12 @@ import twixtools
 import numpy as np
 from raider_eros_montin import raider
 
-def getSiemensKSpace2DInformation(s,raid=0):
+def getSiemensKSpace2DInformation(s,signal=True):
     N=pn.Pathable(getFile(s["options"]))
     n=N.getPosition()
     twix=twixtools.map_twix(n)
+    if signal:
+        raid =len(twix)-1
     H=twix[raid]["hdr"]
     SA=H["Phoenix"]['sSliceArray']
  
@@ -98,10 +111,16 @@ def getSiemensKSpace2DInformation(s,raid=0):
     slices=[]
     SL=SA["asSlice"]
 
-    K=getSiemensKSpace2D(N.getPosition(),noise=False,slice='all',raid=len(twix)-1)
-        
-
-    for t in [0,*SA['alSliceAcqOrder'][1:]]:
+    K=getSiemensKSpace2D(N.getPosition(),noise=False,slice='all',raid=raid)
+    try:
+        SLORDER=[int(a) for a in C["relSliceNumber"].replace('-1','').replace(' ','')]
+    except:
+        SLORDER=range(len(SL))
+    if len(K)==1:
+        CC=[0]
+    else:
+        CC=SLORDER
+    for t in CC:
         sl=SL[t]
         slp=SL[t]['sPosition']
         o={
@@ -112,8 +131,8 @@ def getSiemensKSpace2DInformation(s,raid=0):
             "KSpace":K[t]
         }
         if sl['sNormal']["dTra"]:
-            o["direction"]=np.eye(3)
-            o["direction"][-1:-1]=sl['sNormal']["dTra"]
+            o["direction"]=-np.eye(3)
+            o["direction"][-1:-1]=-sl['sNormal']["dTra"]
         slices.append(o)
     return slices
 
@@ -159,7 +178,8 @@ def getNoiseKSpace(s,slice=0):
 
     if N.getExtension() == 'dat':
         if (s["options"]["multiraid"]):
-                K=getSiemensKSpace2D(N.getPosition(),noise=True,slice=slice,raid=0)
+                # K=getSiemensKSpace2D(N.getPosition(),noise=True,slice=slice,raid=0)
+                K=raider.readMultiRaidNoise(N.getPosition(),slice=slice,raid=0)
                 return K
         else: 
             return getSiemensKSpace2D(N.getPosition(),noise=True,slice=slice)
