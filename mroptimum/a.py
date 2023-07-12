@@ -184,4 +184,3 @@ root.mainloop()
 print(J)
 
 
-from 

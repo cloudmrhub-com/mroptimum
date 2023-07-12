@@ -3,7 +3,7 @@ import cloudmrhub.cm as cm
 import multiprocessing as mlp
 from pynico_eros_montin import pynico as pn
 
-
+VERSION="0.0.2"
 def saveImage(x,origin=None,spacing=None,direction=None,fn=None):
     if not(direction is None):
         x.setImageDirection(direction)

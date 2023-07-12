@@ -1,7 +1,10 @@
 import argparse
 from pynico_eros_montin import pynico as pn
 from pyable_eros_montin import imaginable as ima
-from mro import *
+try:
+    from mro import *
+except:
+    from mroptimum.mro import *
 import cloudmrhub.cm2D as cm2D
 RECON_f=[cm2D.cm2DReconRSS,cm2D.cm2DKellmanB1,cm2D.cm2DKellmanmSense,cm2D.cm2DReconmSense,cm2D.cm2DReconGrappa]
 G_f=[None,None,cm2D.cm2DGfactorSense,cm2D.cm2DGfactormSense,cm2D.cm2DReconGrappa]

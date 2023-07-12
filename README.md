@@ -16,15 +16,19 @@ pip install git+https://github.com/cloudmrhub-com/mroptimum.git
 ```
 # Example
 ## Create a Json Options file
-Json options file areused to bring info
+
 ```
-python mroptimum/generateJson.py -d 2 -s pmr -r sense -o /g/as.json
+python -m mroptimum.generateJson.py -d 2 -s pmr -r sense -o /g/as.json
+```
+## Run an snr calculation
+```
+python -m mroptimum.parsnrv1 -j /g/as.json -o /g/_MR/ -c True -g True -v True -m rue
 ```
 # Roadmap
 - v1.2:
-    - multislice
     - ismrmrd
 - v1:
+    - multislice
     - single slice evaluation
 
 # Cite Us
