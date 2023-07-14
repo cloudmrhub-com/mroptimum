@@ -3,7 +3,7 @@ import cloudmrhub.cm as cm
 import multiprocessing as mlp
 from pynico_eros_montin import pynico as pn
 
-VERSION="0.0.3"
+VERSION="0.0.5"
 def saveImage(x,origin=None,spacing=None,direction=None,fn=None):
     if not(direction is None):
         x.setImageDirection(direction)
@@ -15,7 +15,7 @@ def saveImage(x,origin=None,spacing=None,direction=None,fn=None):
 
 
 RECON_classes=[cm2DReconRSS,cm2DReconB1,cm2DReconSense,cm2DReconmSense,cm2DReconGrappa]
-KELLMAN_classess=[cm2DKellmanRSS,cm2DKellmanB1,cm2DKellmanSense,cm2DKellmanmSense,None]
+KELLMAN_classes=[cm2DKellmanRSS,cm2DKellmanB1,cm2DKellmanSense,cm2DKellmanmSense,None]
 G_classes=[None,None,cm2DGfactorSense,cm2DGfactormSense,None]
 SNR_classes=[None,cm2DSignalToNoiseRatioMultipleReplicas,cm2DSignalToNoiseRatioPseudoMultipleReplicas,cm2DSignalToNoiseRatioPseudoMultipleReplicasWen]
 RECON=["rss","b1","sense","msense","grappa"]
@@ -167,7 +167,7 @@ def getSiemensKSpace2D(n,noise=False,aveRepetition=True,slice=0,raid=0):
         if slice.lower()=='all':
             K=[]
             for sl in range(im_array.shape[SL]):
-                print(sl)
+                # print(sl)
                 K.append(np.transpose(im_array[0,0,0,0,0,0,0,0,0,0,0,sl,0,:,:,:],[2,0,1])   )    
         return K  
     return np.transpose(im_array[0,0,0,0,0,0,0,0,0,0,0,slice,0,:,:,:],[2,0,1])
