@@ -1,6 +1,9 @@
 import argparse
 from pynico_eros_montin import pynico as pn
-from mro import RECON,SNR
+try:
+    from mro import RECON,SNR
+except:
+    from mroptimum.mro import RECON,SNR
 
 
 def thefileS3(fn=None,signal=None,noise=None):
@@ -194,7 +197,7 @@ def reconSense(fn=None,signal=None,noise=None):
             "noise":theNoiseSiemensMultiraid(fn=fn,f=noise),
             "signal":theSignalSiemens(fn=fn,f=signal),
             "sensitivityMap":sensitivityMapsInner(),
-            "mimicKspace":True,
+            "decimate":True,
             "accelerations":[1,1],
         }
     }
@@ -225,11 +228,15 @@ def reconGrappa(fn=None,signal=None,noise=None):
         pn.Pathable(fn).writeJson(J)
     return J
 
+def start(acquisition=2):
+    return {"version":"v0",
+       "acquisition":acquisition
+       }
 
 
-RECON_f=[reconRSS,reconB1,reconSense,reconmSense,reconGrappa]
+RECON_g=[reconRSS,reconB1,reconSense,reconmSense,reconGrappa]
 
-SNR_f=[generateKellman,generateMR,generatePMR,generatePMR]
+SNR_g=[generateKellman,generateMR,generatePMR,generatePMR]
 
 if __name__=="__main__":
     parser = argparse.ArgumentParser(
@@ -247,20 +254,17 @@ if __name__=="__main__":
     parser.add_argument('-m','--multiraid', type=bool, help='Are Data multiraid',default=False)
     args = parser.parse_args()
 
-    J={"version":"v0",
-       "acquisition":args.acquisition
-       }
-
+    J=start(args.acquisition)
     # reconstructor index
     RID=RECON.index(args.reconstructions)
     # reconstruction function
-    RF=RECON_f[RID]
+    RF=RECON_g[RID]
     
     
     # reconstructor index
     SID=SNR.index(args.typeofsnr)
     # reconstruction function
-    SF=SNR_f[SID]
+    SF=SNR_g[SID]
     pn.Pathable(args.joptions).ensureDirectoryExistence()
     SF(fn=args.joptions,reconstructor=RF(fn=None,signal=args.signal,noise=args.noise),J0=J)
     print(f"option file correctly written in {args.joptions} for a ", SF.__name__.replace('generate',''), "SNR and ", RF.__name__, "reconstructor")

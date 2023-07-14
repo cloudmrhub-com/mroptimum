@@ -18,18 +18,28 @@ pip install git+https://github.com/cloudmrhub-com/mroptimum.git
 ## Create a Json Options file
 
 ```
-python -m mroptimum.generateJson.py -d 2 -s pmr -r sense -o /g/as.json
+python -m mroptimum.generate -d 2 -s pmr -r sense -o /g/as.json
 ```
 ## Run an snr calculation
 ```
-python -m mroptimum.parsnrv1 -j /g/as.json -o /g/_MR/ -c True -g True -v True -m rue
+python -m mroptimum.snr -j /g/as.json -o /g/_MR/ -c True -g True -v True -m True
 ```
+
+## Generate and, if you want run
+```
+python -m mroptimum.generate-ui -j /g/mytest/ -r True
+```
+
+
 # Roadmap
 - v1.2:
     - ismrmrd
-- v1:
-    - multislice
-    - single slice evaluation
+- [] v1:
+    - [x] matlab save
+    - [x] coilsens out
+    - [x] generate-gui
+    - [x] multislice
+    - [x] single slice evaluation
 
 # Cite Us
 

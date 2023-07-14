@@ -3,7 +3,7 @@ import cloudmrhub.cm as cm
 import multiprocessing as mlp
 from pynico_eros_montin import pynico as pn
 
-VERSION="0.0.2"
+VERSION="0.0.3"
 def saveImage(x,origin=None,spacing=None,direction=None,fn=None):
     if not(direction is None):
         x.setImageDirection(direction)
@@ -14,9 +14,11 @@ def saveImage(x,origin=None,spacing=None,direction=None,fn=None):
     x.writeImageAs(fn)
 
 
-
+RECON_classes=[cm2DReconRSS,cm2DReconB1,cm2DReconSense,cm2DReconmSense,cm2DReconGrappa]
+KELLMAN_classess=[cm2DKellmanRSS,cm2DKellmanB1,cm2DKellmanSense,cm2DKellmanmSense,None]
+G_classes=[None,None,cm2DGfactorSense,cm2DGfactormSense,None]
+SNR_classes=[None,cm2DSignalToNoiseRatioMultipleReplicas,cm2DSignalToNoiseRatioPseudoMultipleReplicas,cm2DSignalToNoiseRatioPseudoMultipleReplicasWen]
 RECON=["rss","b1","sense","msense","grappa"]
-KELLMAN=[cm2DKellmanRSS,cm2DKellmanB1,cm2DKellmanSense,cm2DKellmanmSense,None]
 SNR=["ac","mr","pmr","cr"]
 
 
@@ -123,10 +125,16 @@ def getSiemensKSpace2DInformation(s,signal=True):
     for t in CC:
         sl=SL[t]
         slp=SL[t]['sPosition']
+        try:
+            ORIGIN=[slp["dSag"],slp["dCor"],slp["dTra"]]
+        except:
+            ORIGIN=[0]*3
+            print("wasn't able to get the origin of this slice")
         o={
             "fov":[sl["dReadoutFOV"],sl["dPhaseFOV"],sl["dThickness"]*SA["lSize"]],
             "spacing":[sl["dReadoutFOV"]/KS[0],sl["dPhaseFOV"]/KS[1],sl["dThickness"]],
-            "origin":[slp["dSag"],slp["dCor"],slp["dTra"]],
+            
+            "origin":ORIGIN,
             "size":[*KS,1],
             "KSpace":K[t]
         }

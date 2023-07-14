@@ -6,9 +6,7 @@ try:
 except:
     from mroptimum.mro import *
 import cloudmrhub.cm2D as cm2D
-RECON_f=[cm2D.cm2DReconRSS,cm2D.cm2DKellmanB1,cm2D.cm2DKellmanmSense,cm2D.cm2DReconmSense,cm2D.cm2DReconGrappa]
-G_f=[None,None,cm2D.cm2DGfactorSense,cm2D.cm2DGfactormSense,cm2D.cm2DReconGrappa]
-SNR_f=[None,cm2D.cm2DSignalToNoiseRatioMultipleReplicas,cm2D.cm2DSignalToNoiseRatioPseudoMultipleReplicas,cm2D.cm2DSignalToNoiseRatioPseudoMultipleReplicasWen]
+
 
 import cloudmrhub.cm as cm
 
@@ -78,10 +76,10 @@ if __name__=="__main__":
             raise Exception(' this version of SNR tool only works with siemens file at the moment')
         # if it's analitical    
         if (SID==0) and (RID<5):
-            THERECON=KELLMAN[RID]
+            THERECON=KELLMAN_classes[RID]
         else:
             #otherwise i go with the other methods of snr
-            THERECON=RECON_f[RID]
+            THERECON=RECON_classes[RID]
         NN=cm2D.cm2DRecon()
         LOG.append('reconstructor set')
         NOISE=getNoiseKSpace(R["options"]["noise"],'all')
@@ -107,11 +105,11 @@ if __name__=="__main__":
             r.setNoiseCovariance(NC)
             if r.HasAcceleration:
                 r.AccelerationF,r.AccelerationP=R["options"]["accelerations"]
-                LOG.append(f'Acceleration set to {R["options"]["mimicKspace"]}' )
-            if ((r.HasAcceleration) and (R["options"]["mimicKspace"])):
+                LOG.append(f'Acceleration set to {R["options"]["decimate"]}' )
+            if ((r.HasAcceleration) and (R["options"]["decimate"])):
                 UK,ac=undersample(S,R)
                 r.setSignalKSpace(UK)
-                LOG.append(f'Mimicked an accelaration of {R["options"]["mimicKspace"]}')
+                LOG.append(f'Mimicked an accelaration of {R["options"]["decimate"]}')
             else:
                 r.setSignalKSpace(S)
             if ac:
@@ -129,7 +127,7 @@ if __name__=="__main__":
                 TASK.append(manalitical(r,counter))  
 
             else:
-                SN=SNR_f[SID]
+                SN=SNR_classes[SID]
                 s=SN()
 
                 try:
@@ -185,7 +183,7 @@ if __name__=="__main__":
             if ((r.HasAcceleration) and (r.HasSensitivity)):
                 G=np.zeros_like(SNR)
                 for ic,ia in enumerate(TASK):
-                    ia.reconstructor.__class__=G_f[RID]
+                    ia.reconstructor.__class__=G_classes[RID]
                     G[:,:,ic]=np.abs(ia.reconstructor.getOutput())
                 IMAOUT.append([3,3,"G-Factor",ima.numpyToImaginable(G),'data/gfactor.nii.gz','accessory'])
                 M.append(["G-factor",G])
