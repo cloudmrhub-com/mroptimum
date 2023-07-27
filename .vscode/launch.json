@@ -6,6 +6,7 @@
     "configurations": [
 
 
+
         {
             "name": "generateAnalitical",
             "type": "python",
@@ -108,7 +109,7 @@
             "justMyCode": true,
             "args": [
                 "-j",
-                "/tmp/2e11b7c3-d33e-4338-af84-f331840b1c71.json",
+                "/tmp/eb4effd5-9aef-444c-a827-6c35c570fd90.json",
                 "-o",
                 "/tmp/OUT/",
                 "-c",

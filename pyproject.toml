@@ -7,7 +7,7 @@ allow-direct-references = true
 
 [project]
 name = "mroptimum"
-version = "0.0.5"
+version = "0.0.6"
 authors = [
   { name="Dr. Eros Montin, PhD", email="eros.montin@gmail.com" },
 ]
