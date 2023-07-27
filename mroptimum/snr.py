@@ -35,7 +35,7 @@ if __name__=="__main__":
     parser.add_argument('-f','--outputformat', choices=['mat','cmr','nifti','mha'],type=str, help='output g-factor')
     parser.add_argument('-v','--verbose', choices=[True,False],type=bool, help='would you like to see the plots while calculating',default=False)
     parser.add_argument('-m','--matlab', choices=[True,False],type=bool, help='would you like to have a mat file',default=False)
-    parser.add_argument('-p','--parallel', choices=[True,False],type=bool, help='Parallel?',default=False)
+    parser.add_argument('-p','--parallel', choices=[True,False],type=bool, help='Parallel?',default=True)
 
     args = parser.parse_args()
 
