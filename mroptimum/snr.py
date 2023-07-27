@@ -35,6 +35,7 @@ if __name__=="__main__":
     parser.add_argument('-f','--outputformat', choices=['mat','cmr','nifti','mha'],type=str, help='output g-factor')
     parser.add_argument('-v','--verbose', choices=[True,False],type=bool, help='would you like to see the plots while calculating',default=False)
     parser.add_argument('-m','--matlab', choices=[True,False],type=bool, help='would you like to have a mat file',default=False)
+    parser.add_argument('-p','--parallel', choices=[True,False],type=bool, help='Parallel?',default=False)
 
     args = parser.parse_args()
 
@@ -141,12 +142,19 @@ if __name__=="__main__":
                     boxSize=None
                 
                 TASK.append(mreplicas(r,s,NR,boxSize,counter))
-                
-        p=mlp.Pool()
-        dd=p.map(rT,TASK)
-        p.close()
-        for sn,cc in dd:
-            SNR[:,:,cc]=np.abs(sn)
+
+        if args.parallel:        
+            p=mlp.Pool()
+            dd=p.map(rT,TASK)
+            p.close()
+            for sn,cc in dd:
+                SNR[:,:,cc]=np.abs(sn)
+        else:
+            for _t in TASK:
+                sn,cc = rT(_t)
+                SNR[:,:,cc]=np.abs(sn)
+                print(cc)
+
         NN=np.isnan(SNR)
         LOG.append(f'{np.count_nonzero(NN)} NaN are now 0 over the {np.prod(SNR.shape)} voxels' )
         SNR[NN]=0

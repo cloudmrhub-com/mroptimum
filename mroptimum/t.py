@@ -34,8 +34,8 @@ def s3FileTolocal(J,s3=None,pt="/tmp"):
     return J
 
 from pynico_eros_montin import pynico as pn
-jf="/g/mroptimumCU/acmsense.json"
-J=pn.Pathable("/g/mroptimumCU/acmsense.json").readJson()
+jf="/g/mroptimumCU/pmrgrappa.json"
+J=pn.Pathable(jf).readJson()
 
 T=J["task"]
 
