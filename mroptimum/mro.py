@@ -14,11 +14,11 @@ def saveImage(x,origin=None,spacing=None,direction=None,fn=None):
     x.writeImageAs(fn)
 
 
-RECON_classes=[cm2DReconRSS,cm2DReconB1,cm2DReconSense,cm2DReconmSense,cm2DReconGrappa]
-KELLMAN_classes=[cm2DKellmanRSS,cm2DKellmanB1,cm2DKellmanSense,cm2DKellmanmSense,None]
+RECON_classes=[cm2DReconRSS,cm2DReconB1,cm2DReconmSense,cm2DReconGrappa]
+KELLMAN_classes=[cm2DKellmanRSS,cm2DKellmanB1,cm2DKellmanmSense,None]
 G_classes=[None,None,cm2DGfactorSense,cm2DGfactormSense,None]
 SNR_classes=[None,cm2DSignalToNoiseRatioMultipleReplicas,cm2DSignalToNoiseRatioPseudoMultipleReplicas,cm2DSignalToNoiseRatioPseudoMultipleReplicasWen]
-RECON=["rss","b1","sense","msense","grappa"]
+RECON=["rss","b1","sense","grappa"]
 SNR=["ac","mr","pmr","cr"]
 
 

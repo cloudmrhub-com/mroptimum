@@ -105,7 +105,7 @@ if __name__=="__main__":
             r.setNoiseCovariance(NC)
             if r.HasAcceleration:
                 r.AccelerationF,r.AccelerationP=R["options"]["accelerations"]
-                LOG.append(f'Acceleration set to {R["options"]["decimate"]}' )
+                LOG.append(f'Acceleration set to {R["options"]["accelerations"]}' )
             if ((r.HasAcceleration) and (R["options"]["decimate"])):
                 UK,ac=undersample(S,R)
                 r.setSignalKSpace(UK)

@@ -7,3 +7,4 @@ docs/
 dist/
 mroptimum/dev*
 mroptimum/link_rawdata_examples
+mroptimum/t.py
