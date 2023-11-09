@@ -39,8 +39,6 @@ if __name__=="__main__":
 
        
     args = parser.parse_args()
-    print(args)
-
 
     if args.joptions==None:
         raise Exception("please input a json file forthe customization of the SNR calculation")
