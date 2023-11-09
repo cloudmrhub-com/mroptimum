@@ -30,16 +30,17 @@ if __name__=="__main__":
     parser.add_argument('-j','--joptions', type=str, help='optionfile with the backbone of the calculation')
     parser.add_argument('-o','--output', type=str, help='output path')
     parser.add_argument('-l','--loutput', type=str, help='output log file')
-    parser.add_argument('-c','--coilsense', type=bool, help='output coil sensitivities',default=False)
+    parser.add_argument('-c','--coilsense', type=bool, help='output coil sensitivities',default=False, action=argparse.BooleanOptionalAction)
     parser.add_argument('-g','--gfactor', type=bool, help='otput g-factor',default=False)
     parser.add_argument('-f','--outputformat', choices=['mat','cmr','nifti','mha'],type=str, help='output g-factor')
-    parser.add_argument('-v','--verbose', choices=[True,False],type=bool, help='would you like to see the plots while calculating',default=False)
-    parser.add_argument('-m','--matlab', choices=[True,False],type=bool, help='would you like to have a mat file',default=False)
-    parser.add_argument('-P','--parallel', choices=[True,False],type=bool, help='Parallel?',default=True)
+    parser.add_argument('-v','--verbose', choices=[True,False],type=bool, help='would you like to see the plots while calculating',default=False, action=argparse.BooleanOptionalAction)
+    parser.add_argument('-m','--matlab', choices=[True,False],type=bool, help='would you like to have a mat file',default=False, action=argparse.BooleanOptionalAction)
+    parser.add_argument('-p','--parallel', choices=[True,False],type=bool, help='Parallel?',default=True, action=argparse.BooleanOptionalAction)
 
-    
+       
     args = parser.parse_args()
     print(args)
+
 
     if args.joptions==None:
         raise Exception("please input a json file forthe customization of the SNR calculation")
