@@ -1,0 +1,61 @@
+{
+    "version": "v0",
+    "acquisition": 2,
+    "type": "snr",
+    "id": 0,
+    "name": "ac",
+    "options": {
+        "reconstructor": {
+            "type": "recon",
+            "name": "sense",
+            "id": 2,
+            "options": {
+                "noise": {
+                    "type": "file",
+                    "options": {
+                        "type": "local",
+                        "filename": "/data/PROJECTS/cloudmrhub/cloudmrhub/data/meas_MID00027_FID188181_Multislice_no_RF.dat",
+                        "options": {},
+                        "multiraid": false,
+                        "vendor": "Siemens"
+                    }
+                },
+                "signal": {
+                    "type": "file",
+                    "options": {
+                        "type": "local",
+                        "filename": "/data/PROJECTS/cloudmrhub/cloudmrhub/data/meas_MID00024_FID188178_Multislice.dat",
+                        "options": {},
+                        "multiraid": false,
+                        "vendor": "Siemens"
+                    }
+                },
+                "sensitivityMap": {
+                    "type": "sensitivityMap",
+                    "id": 2,
+                    "name": "innerACL",
+                    "options": {
+                        "sensitivityMapSource": {
+                            "type": "file",
+                            "options": {
+                                "type": "local",
+                                "filename": "/youtpath/to/the/file.dat",
+                                "options": {}
+                            }
+                        },
+                        "sensitivityMapMethod": "innerACL"
+                    }
+                },
+                "decimate": true,
+                "accelerations": [
+                    1,
+                    2
+                ],
+                "acl": [
+                    40,
+                    40
+                ]
+            }
+        }
+    }
+}

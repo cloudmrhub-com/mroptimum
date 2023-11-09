@@ -138,6 +138,15 @@
             "console": "integratedTerminal",
             "justMyCode": true,
             "args": []
+        },
+        {
+            "name": "sense innerACL",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": ["-j", "/g/as.json", "-o", "/g/senseACL/", "-c", "True", "-g", "True", "-v", "False", "-m", "True","-p","False"]
         }
     ]
 }

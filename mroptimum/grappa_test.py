@@ -69,7 +69,7 @@
 import twixtools as tx
 import pygrappa
 import numpy as np
-
+from mro import fixAccelratedKSpace2D
 
 # n='/data/MYDATA/siemensrawdataexamples/Sebastian/raw/meas_MID02696_FID183824_gre_GRAPPA_2.dat'
 n='/data/MYDATA/siemensrawdataexamples/Sebastian/raw/meas_MID02697_FID183825_gre_GRAPPA_3.dat'
@@ -86,7 +86,7 @@ im_array.flags['remove_os'] = True  # activate automatic os removal
 im_array.flags['average']['Rep'] = True  # average all repetitions
 im_array.flags['average']['Ave'] = True # average all repetitions
 
-signal=np.transpose(im_array[0,0,0,0,0,0,0,0,0,0,sl,0,0,:,:,:],[2,0,1])  
+signal=fixAccelratedKSpace2D(np.transpose(im_array[0,0,0,0,0,0,0,0,0,0,sl,0,0,:,:,:],[2,0,1]))
 print('---noise----')
 n_array = twix[0]['noise']
 
@@ -99,13 +99,15 @@ noise=np.transpose(n_array[0,0,0,0,0,0,0,0,0,0,sl,0,0,:,:,:],[2,0,1])
 
 print('---refscan----')
 r_array = twix[1]['refscan']
-
 r_array.flags['remove_os'] = True  # activate automatic os removal
 r_array.flags['average']['Rep'] = True  # average all repetitions
 im_array.flags['average']['Ave'] = True # average all repetitions
 
-ref=np.transpose(r_array[0,0,0,0,0,0,0,0,0,0,sl,0,0,:,:,:],[2,0,1])  
+ref_=np.transpose(r_array[0,0,0,0,0,0,0,0,0,0,sl,0,0,:,:,:],[2,0,1])  
+n_ref=ref_.shape[1]
 
+ref=np.zeros_like(signal)
+ref[:,0:n_ref]=ref_
 print("signal",signal.shape,"noise",noise.shape,"ref",ref.shape)
 # 76 lines instead of 24
 
@@ -127,6 +129,8 @@ recon(signal,noise,"signal")
 recon(ref,noise,"ref")
 import pygrappa
 
-K=pygrappa.grappa(signal,ref,kernel_size=(10,10))
+K=pygrappa.grappa(signal,ref,kernel_size=(5,5))
 print(K.shape)
 recon(K,noise,"signal,ref")
+
+#only difference 76 lines

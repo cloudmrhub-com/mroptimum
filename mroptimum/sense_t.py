@@ -67,15 +67,17 @@
 # s3 = boto3.resource('s3',aws_access_key_id=ID,aws_secret_access_key=SA_ID,aws_session_token=TK)
 # s3.Bucket("mroptimum-result").upload_file(Z.getPosition(),Z.getBaseName())
 import twixtools as tx
-import pygrappa
+from mro import fixAccelratedKSpace2D
 import numpy as np
 
 
-# n='/data/MYDATA/siemensrawdataexamples/Sebastian/raw/meas_MID02696_FID183824_gre_GRAPPA_2.dat'
-n='/data/MYDATA/siemensrawdataexamples/Sebastian/raw/meas_MID02697_FID183825_gre_GRAPPA_3.dat'
+# n='/data/MYDATA/siemensrawdataexamples/Sebastian/raw/meas_MID02699_FID183827_gre_mSENSE_2.dat'
+n='/data/MYDATA/siemensrawdataexamples/Sebastian/raw/meas_MID02700_FID183828_gre_mSENSE_3.dat'
 twix=tx.map_twix(n)
 H=twix[1]["hdr"]
 iPat=H['MeasYaps']['sPat']
+
+import matplotlib.pyplot as plt
 
 
 print(iPat)
@@ -86,7 +88,7 @@ im_array.flags['remove_os'] = True  # activate automatic os removal
 im_array.flags['average']['Rep'] = True  # average all repetitions
 im_array.flags['average']['Ave'] = True # average all repetitions
 
-signal=np.transpose(im_array[0,0,0,0,0,0,0,0,0,0,sl,0,0,:,:,:],[2,0,1])  
+signal=fixAccelratedKSpace2D(np.transpose(im_array[0,0,0,0,0,0,0,0,0,0,sl,0,0,:,:,:],[2,0,1]))
 print('---noise----')
 n_array = twix[0]['noise']
 
@@ -99,34 +101,78 @@ noise=np.transpose(n_array[0,0,0,0,0,0,0,0,0,0,sl,0,0,:,:,:],[2,0,1])
 
 print('---refscan----')
 r_array = twix[1]['refscan']
-
 r_array.flags['remove_os'] = True  # activate automatic os removal
 r_array.flags['average']['Rep'] = True  # average all repetitions
 im_array.flags['average']['Ave'] = True # average all repetitions
 
-ref=np.transpose(r_array[0,0,0,0,0,0,0,0,0,0,sl,0,0,:,:,:],[2,0,1])  
+ref_=np.transpose(r_array[0,0,0,0,0,0,0,0,0,0,sl,0,0,:,:,:],[2,0,1])  
+n_ref=ref_.shape[1]
 
+ref=np.zeros_like(signal)
+ref[:,0:n_ref]=ref_
 print("signal",signal.shape,"noise",noise.shape,"ref",ref.shape)
 # 76 lines instead of 24
 
-from cloudmrhub.cm2D import cm2DReconRSS
+
+# 76 lines instead of 24
+
+from cloudmrhub.cm2D import cm2DReconRSS,cm2DReconmSense
 # pygrappa.grappa(,)
+
+# L=np.mean(np.mean(ref,axis=2),axis=0)
+# STARTREF=np.min(np.nonzero(L!=0))
+# print(STARTREF)
+
 
 
 import matplotlib.pyplot as plt
-def recon(signal,noise,tt):
+def recon(signal,noise):
     R=cm2DReconRSS()
     R.setNoiseKSpace(noise)
     R.setSignalKSpace(signal)
-    plt.imshow(R.getOutput())
-    plt.title(tt)
-    plt.show()
+    return R.getOutput()
 
-recon(signal,noise,"signal")
 
-recon(ref,noise,"ref")
-import pygrappa
+plt.figure()
+for a in range(9):
+    plt.subplot(3,3,a+1)
+    plt.imshow(np.abs(signal[:,:,a]))
+    plt.title(f"signal k {a} coil")
 
-K=pygrappa.grappa(signal,ref,kernel_size=(10,10))
-print(K.shape)
-recon(K,noise,"signal,ref")
+plt.figure()
+for a in range(9):
+    plt.subplot(3,3,a+1)
+    plt.imshow(np.abs(ref[:,:,a]))
+    plt.title(f"ref k {a} coil")
+
+
+plt.figure()
+
+A=recon(signal,noise)
+plt.subplot(1,2,1)
+plt.imshow(A)
+plt.title("signal")
+
+
+B=recon(ref,noise)
+plt.subplot(1,2,2)
+plt.imshow(B)
+plt.title("ref")
+
+# import pygrappa
+
+S=cm2DReconmSense()
+S.setSignalKSpace(signal)
+S.setNoiseKSpace(noise)
+S.setAutocalibrationLines((0,iPat['lRefLinesPE']))
+S.AccelerationP=iPat['lAccelFactPE']
+S.setCoilSensitivityMatrixSource(ref)
+S.setCoilSensitivityMatrixCalculationMethod('innerACL')
+
+plt.figure()
+plt.imshow(np.abs(S.getOutput()))
+plt.title('recon')
+plt.show()
+
+
+#only difference 76 lines

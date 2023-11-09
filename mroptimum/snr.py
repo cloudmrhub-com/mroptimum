@@ -105,7 +105,9 @@ if __name__=="__main__":
             S=slice['KSpace']
             r.setNoiseCovariance(NC)
             if r.HasAcceleration:
-                r.AccelerationF,r.AccelerationP=R["options"]["accelerations"]
+                r.AccelerationF,r.AccelerationP=[1,1]
+                if R["options"]["accelerations"]!=None:
+                    r.AccelerationF,r.AccelerationP=R["options"]["accelerations"]
                 LOG.append(f'Acceleration set to {R["options"]["accelerations"]}' )
             if ((r.HasAcceleration) and (R["options"]["decimate"])):
                 UK,ac=undersample(S,R)
@@ -121,8 +123,11 @@ if __name__=="__main__":
                 LOG.append(f'Sensitivity Map calculation method set to {R["options"]["sensitivityMap"]["name"]}' )
             if ((r.HasAcceleration) and (not r.HasSensitivity)):
                 # this is grappa:
-                r.setGrappaKernel(R["options"]["kernelSize"])
-                LOG.append(f'Grappa Kernel set to {R["options"]["kernelSize"]}')
+                if R["options"]["kernelSize"]!=None:
+                    r.setGrappaKernel(R["options"]["kernelSize"])
+                else:
+                    r.setGrappaKernel([5,4])
+                LOG.append(f'Grappa Kernel set to {r.getGrappaKernel()}' )
 
             if SID==0:
                 TASK.append(manalitical(r,counter))  
