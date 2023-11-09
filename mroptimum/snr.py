@@ -37,7 +37,9 @@ if __name__=="__main__":
     parser.add_argument('-m','--matlab', choices=[True,False],type=bool, help='would you like to have a mat file',default=False)
     parser.add_argument('-p','--parallel', choices=[True,False],type=bool, help='Parallel?',default=True)
 
+    
     args = parser.parse_args()
+    print(args)
 
     if args.joptions==None:
         raise Exception("please input a json file forthe customization of the SNR calculation")
