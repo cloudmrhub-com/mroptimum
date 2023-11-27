@@ -1,0 +1,64 @@
+{
+    "version": "v0",
+    "acquisition": 2,
+    "type": "SNR",
+    "id": 2,
+    "name": "PMR",
+    "options": {
+        "boxSize":2,"NR":20,
+        "reconstructor": {
+            "type": "recon",
+            "name": "GRAPPA",
+            "id": 4,
+            "options": {
+                "noise": {
+                    "type": "file",
+                    "options": {
+                        "type": "local",
+                        "filename": "/data/PROJECTS/mroptimum/_data/noise.dat",
+                        "options": {},
+                        "multiraid": false,
+                        "vendor": "Siemens"
+                    }
+                },
+                "signal": {
+                    "type": "file",
+                    "options": {
+                        "type": "local",
+                        "filename": "/data/PROJECTS/mroptimum/_data/signal.dat",
+                        "options": {},
+                        "multiraid": false,
+                        "vendor": "Siemens"
+                    }
+                },
+                "sensitivityMap": {
+                    "type": "sensitivityMap",
+                    "id": 1,
+                    "name": "inner",
+                    "options": {
+                        "sensitivityMapSource": {
+                            "type": "file",
+                            "options": {
+                                "type": "local",
+                                "filename": "/youtpath/to/the/file.dat",
+                                "options": {}
+                            }
+                        },
+                        "sensitivityMapMethod": "inner"
+                    }
+                },
+                "decimate": true,
+                "accelerations": [
+                    1,
+                    2
+                ],
+                "acl": [
+                    20,
+                    20
+                ],
+                
+                "kernelSize" : [4,4]
+            }
+        }
+    }
+}
