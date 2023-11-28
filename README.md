@@ -30,6 +30,28 @@ python -m mroptimum.snr -j /g/as.json -o /g/_MR/ -c True -g True -v True -m True
 python -m mroptimum.generate-ui -j /g/mytest/ -r True
 ```
 
+## IDS
+
+### Image Reconstructions
+- 0 RSS
+- 1 B1
+- 2 SENSE
+- 3 GRAPPA
+
+### SNR Reconstructions
+- 0 Analytical
+- 1 Multiple Replicas
+- 2 Pseudo Multiple Replicas
+- 3 Pseudo Multiple Replicas Wien
+
+
+### Output
+- 0 SNR
+- 1 Noise Covariance Matrix
+- 2 Noise Coefficient Matrix
+- 4 G Factor
+- >=10 Coil Sensitivities Maps 
+
 
 # Roadmap
 - v1.2:
