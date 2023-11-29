@@ -96,6 +96,7 @@ def calcPseudoMultipleReplicasSNR(O):
     if isinstance(reconstructor,cm2DReconSENSE) and O["savegfactor"]:
         reconstructor.__class__=cm2DGFactorSENSE
         OUT["images"]["GFactor"]={"id":4,"dim":3,"name":"G Factor","data":reconstructor.getOutput(),"filename":'data/G.nii.gz',"type":'accessory',"numpyPixelType":reconstructor.getOutput().dtype.name} 
+        OUT["images"]["InverseGFactor"]={"id":2,"dim":3,"name":"Inverse G Factor","data":1.0/reconstructor.getOutput(),"filename":'data/IG.nii.gz',"type":'accessory',"numpyPixelType":reconstructor.getOutput().dtype.name} 
 
     return OUT
 def calcPseudoMultipleReplicasSNRWien(O):    
