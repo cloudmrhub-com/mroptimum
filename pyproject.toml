@@ -5,9 +5,12 @@ build-backend = "hatchling.build"
 [tool.hatch.metadata]
 allow-direct-references = true
 
+[tool.hatch.build.targets.wheel]
+include = ["**/*.py"]
+
 [project]
 name = "mroptimum"
-version = "0.9.7"
+version = "0.9.8"
 authors = [
   { name="Dr. Eros Montin, PhD", email="eros.montin@gmail.com" },
 ]

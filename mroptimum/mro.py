@@ -32,6 +32,7 @@ def customizerecontructor(reconstructor,O={}):
     except:
         LOG=[]
 
+
     reconstructor.complexType=np.singlecomplex
     #signal
     if reconstructor.HasAcceleration:
@@ -50,6 +51,10 @@ def customizerecontructor(reconstructor,O={}):
     #reference
     if reconstructor.HasSensitivity or reconstructor.HasAcceleration:
         reconstructor.setReferenceKSpace(reference)
+        if "mask" in O.keys():
+            reconstructor.setMaskCoilSensitivityMatrix(O["mask"])
+        else:
+            reconstructor.setMaskCoilSensitivityMatrixBasedOnEspirit()
 
     #noise
     if noise is not None:
@@ -190,6 +195,13 @@ def calcMultipleReplicasSNR(O):
             L2.reconstructor.setPrewhitenedSignal(_S)
             if reconstructor.HasSensitivity or reconstructor.HasAcceleration:
                 L2.reconstructor.setPrewhitenedReferenceKSpace(_R)
+        # mask
+        if reconstructor.HasSensitivity or reconstructor.HasAcceleration:
+            if "mask" in O.keys():
+                reconstructor.setMaskCoilSensitivityMatrix(O["mask"])
+            else:
+                reconstructor.setMaskCoilSensitivityMatrixBasedOnEspirit()
+
         L2.add2DImage(L2.reconstructor.getOutput())
     
     SNR=L2.getOutput()

@@ -46,7 +46,7 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["-j", "mroptimum/collections/AC/sense_settings.json", "-o", "/g/SNR/AC/senseACL/", "--coilsens", "--gfactor", "--no-verbose", "--matlab","--parallel"]
+            "args": ["-j", "mroptimum/collections/AC/sense_settings.json", "-o", "/g/SNR/AC/senseACL/", "--coilsens", "--gfactor", "--no-verbose", "--matlab","--no-parallel"]
         },
        
         {

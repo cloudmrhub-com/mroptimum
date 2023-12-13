@@ -2,8 +2,8 @@
     "version": "v0",
     "acquisition": 2,
     "type": "SNR",
-    "id": 2,
-    "name": "PMR",
+    "id": 3,
+    "name": "CR",
 
     "options": {
         "boxSize":2,"NR":20,
