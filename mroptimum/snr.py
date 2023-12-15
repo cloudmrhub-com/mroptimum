@@ -12,7 +12,11 @@ import cloudmrhub.cm2D as cm2D
 
 
 import cloudmrhub.cm as cm
-debug=True
+import os
+
+#read debug from environment and put it to false if not present
+debug=os.getenv('DEBUG',False)
+
 
 print(f"mroptimum version {V}")
 
