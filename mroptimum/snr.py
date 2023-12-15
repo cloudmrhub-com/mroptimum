@@ -9,7 +9,7 @@ import cloudmrhub.cm2D as cm2D
 
 
 import cloudmrhub.cm as cm
-
+debug=False
 
 def saveMatlab(fn,vars):
     J=dict()
@@ -263,6 +263,8 @@ if __name__=="__main__":
                 O.addBaseName(im["filename"])
                 O.ensureDirectoryExistence()
                 pixeltype='real'
+                if debug:
+                    im["data"]=np.abs(im["data"])
                 if np.iscomplexobj(im["data"]):
                     pixeltype='complex'
                     im["data"]=im["data"].astype(np.singlecomplex)

@@ -118,7 +118,7 @@ def calcPseudoMultipleReplicasSNRWien(O):
     if boxSize:
         L2.boxSize=boxSize
 
-    reconstructor =customizerecontructor(O) 
+    reconstructor =customizerecontructor(reconstructor=reconstructor,O) 
     SNR=L2.getOutput()
     OUT["images"]["SNR"]={"id":0,"dim":3,"name":"SNR","data":SNR,"filename":'data/SNR.nii.gz',"type":'output',"numpyPixelType":SNR.dtype.name}
 

@@ -8,6 +8,7 @@
 
 
 
+
   
         {
             "name": "generate ui ",
@@ -25,7 +26,7 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["-j", "mroptimum/collections/AC/rss_settings.json", "-o", "/g/SNR/AC/RSS/", "--no-coilsens", "--no-gfactor", "--no-verbose", "--matlab","--parallel"]
+            "args": ["-j", "mroptimum/collections/AC/rss_settings.json", "-o", "/g/SNR/AC/RSS/", "--no-coilsens", "--no-gfactor", "--no-verbose", "--matlab","--no-parallel"]
         },     
 
        
@@ -111,7 +112,7 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["-j", "mroptimum/collections/CR/rss_settings.json", "-o", "/g/SNR/CR/rss/", "--no-coilsens", "--no-gfactor", "--no-verbose", "--matlab","--parallel"]
+            "args": ["-j", "mroptimum/collections/CR/rss_settings.json", "-o", "/g/SNR/CR/rss/", "--no-coilsens", "--no-gfactor", "--no-verbose", "--matlab","--no-parallel"]
         },     
         {
             "name": "CR B1",
