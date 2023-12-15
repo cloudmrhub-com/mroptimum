@@ -1,15 +1,21 @@
 import argparse
 from pynico_eros_montin import pynico as pn
 from pyable_eros_montin import imaginable as ima
+
 try:
     from mro import *
+    V='local'
 except:
     from mroptimum.mro import *
+    V="pip"
 import cloudmrhub.cm2D as cm2D
 
 
 import cloudmrhub.cm as cm
-debug=False
+debug=True
+
+print(f"mroptimum version {V}")
+
 
 def saveMatlab(fn,vars):
     J=dict()
