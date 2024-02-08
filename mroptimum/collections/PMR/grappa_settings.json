@@ -5,7 +5,7 @@
     "id": 2,
     "name": "PMR",
     "options": {
-        "NR":20,
+        "NR":10,
         "reconstructor": {
             "type": "recon",
             "name": "GRAPPA",
@@ -31,30 +31,14 @@
                         "vendor": "Siemens"
                     }
                 },
-                "sensitivityMap": {
-                    "type": "sensitivityMap",
-                    "id": 1,
-                    "name": "inner",
-                    "options": {
-                        "sensitivityMapSource": {
-                            "type": "file",
-                            "options": {
-                                "type": "local",
-                                "filename": "/youtpath/to/the/file.dat",
-                                "options": {}
-                            }
-                        },
-                        "sensitivityMapMethod": "inner"
-                    }
-                },
                 "decimate": true,
                 "accelerations": [
                     1,
-                    2
+                    4
                 ],
                 "acl": [
-                    20,
-                    20
+                    24,
+                    24
                 ],
                 
                 "kernelSize" : [4,4]

@@ -4,13 +4,30 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-    
 
 
 
-
-
-  
+        {
+            "name": "RYAN",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "-j",
+                "/data/MYDATA/siemensrawdataexamples/Ryan_linarc/calculations/sense_settings_8_2.json",
+                "-o",
+                "/g/SNR/RYAN/",
+                "--coilsens",
+                "--gfactor",
+                "--no-verbose",
+                "--matlab",
+                "--parallel",
+                "-l",
+                "/g/SNR/RYAN/l.json"
+            ]
+        },
         {
             "name": "generate ui ",
             "type": "python",
@@ -18,7 +35,11 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["-j","/g/generate/","--no-run"]
+            "args": [
+                "-j",
+                "/g/generate/",
+                "--no-run"
+            ]
         },
         {
             "name": "AC RSS",
@@ -27,10 +48,18 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["-j", "mroptimum/collections/AC/rss_settings.json", "-o", "/g/SNR/AC/RSS/", "--no-coilsens", "--no-gfactor", "--no-verbose", "--matlab","--no-parallel"]
-        },     
-
-       
+            "args": [
+                "-j",
+                "mroptimum/collections/AC/rss_settings.json",
+                "-o",
+                "/g/SNR/AC/RSS/",
+                "--no-coilsens",
+                "--no-gfactor",
+                "--no-verbose",
+                "--matlab",
+                "--parallel"
+            ]
+        },
         {
             "name": "AC B1",
             "type": "python",
@@ -38,9 +67,18 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["-j", "mroptimum/collections/AC/b1_settings.json", "-o", "/g/SNR/AC/B1/", "--coilsens", "--no-gfactor", "--no-verbose", "--matlab","--parallel"]
+            "args": [
+                "-j",
+                "mroptimum/collections/AC/b1_settings.json",
+                "-o",
+                "/g/SNR/AC/B1/",
+                "--coilsens",
+                "--no-gfactor",
+                "--no-verbose",
+                "--matlab",
+                "--parallel"
+            ]
         },
-       
         {
             "name": "AC sense innerACL",
             "type": "python",
@@ -48,9 +86,18 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["-j", "mroptimum/collections/AC/sense_settings.json", "-o", "/g/SNR/AC/senseACL/", "--coilsens", "--gfactor", "--no-verbose", "--matlab","--no-parallel"]
+            "args": [
+                "-j",
+                "mroptimum/collections/AC/sense_settings.json",
+                "-o",
+                "/g/SNR/AC/senseACL/",
+                "--coilsens",
+                "--gfactor",
+                "--no-verbose",
+                "--matlab",
+                "--parallel"
+            ]
         },
-       
         {
             "name": "AC real sense",
             "type": "python",
@@ -58,8 +105,18 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["-j", "mroptimum/collections/AC/sense_real_settings.json", "-o", "/g/SNR/AC/senseRealdataACL/", "--coilsens", "--gfactor", "--no-verbose", "--matlab","--parallel"]
-        },       
+            "args": [
+                "-j",
+                "mroptimum/collections/AC/sense_real_settings.json",
+                "-o",
+                "/g/SNR/AC/senseRealdataACL/",
+                "--coilsens",
+                "--gfactor",
+                "--no-verbose",
+                "--matlab",
+                "--parallel"
+            ]
+        },
         {
             "name": "PMR RSS",
             "type": "python",
@@ -67,8 +124,18 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["-j", "mroptimum/collections/PMR/rss_settings.json", "-o", "/g/SNR/PMR/RSS/", "--no-coilsens", "--no-gfactor", "--no-verbose", "--matlab","--no-parallel"]
-        },     
+            "args": [
+                "-j",
+                "mroptimum/collections/PMR/rss_settings.json",
+                "-o",
+                "/g/SNR/PMR/RSS/",
+                "--no-coilsens",
+                "--no-gfactor",
+                "--no-verbose",
+                "--matlab",
+                "--parallel"
+            ]
+        },
         {
             "name": "PMR B1",
             "type": "python",
@@ -76,7 +143,17 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["-j", "mroptimum/collections/PMR/b1_settings.json", "-o", "/g/SNR/PMR/B1/", "--coilsens", "--no-gfactor", "--no-verbose", "--matlab","--no-parallel"]
+            "args": [
+                "-j",
+                "mroptimum/collections/PMR/b1_settings.json",
+                "-o",
+                "/g/SNR/PMR/B1/",
+                "--coilsens",
+                "--no-gfactor",
+                "--no-verbose",
+                "--matlab",
+                "--parallel"
+            ]
         },
         {
             "name": "PMR sense innerACL",
@@ -85,9 +162,18 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["-j", "mroptimum/collections/PMR/sense_settings.json", "-o", "/g/SNR/PMR/senseACL/", "--coilsens", "--gfactor", "--no-verbose", "--matlab","--parallel"]
+            "args": [
+                "-j",
+                "mroptimum/collections/PMR/sense_settings.json",
+                "-o",
+                "/g/SNR/PMR/senseACL/",
+                "--coilsens",
+                "--gfactor",
+                "--no-verbose",
+                "--matlab",
+                "--parallel"
+            ]
         },
-       
         {
             "name": "PMR real sense",
             "type": "python",
@@ -95,8 +181,18 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["-j", "mroptimum/collections/PMR/sense_real_settings.json", "-o", "/g/SNR/PMR/senserealData/", "--coilsens", "--gfactor", "--no-verbose", "--matlab","--parallel"]
-        },     
+            "args": [
+                "-j",
+                "mroptimum/collections/PMR/sense_real_settings.json",
+                "-o",
+                "/g/SNR/PMR/senserealData/",
+                "--coilsens",
+                "--gfactor",
+                "--no-verbose",
+                "--matlab",
+                "--parallel"
+            ]
+        },
         {
             "name": "PMR grappa",
             "type": "python",
@@ -104,8 +200,18 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["-j", "mroptimum/collections/PMR/grappa_settings.json", "-o", "/g/SNR/PMR/grappa/", "--coilsens", "--no-gfactor", "--no-verbose", "--matlab","--no-parallel"]
-        }, 
+            "args": [
+                "-j",
+                "mroptimum/collections/PMR/grappa_settings.json",
+                "-o",
+                "/g/SNR/PMR/grappa/",
+                "--coilsens",
+                "--no-gfactor",
+                "--no-verbose",
+                "--matlab",
+                "--parallel"
+            ]
+        },
         {
             "name": "CR RSS",
             "type": "python",
@@ -113,8 +219,18 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["-j", "mroptimum/collections/CR/rss_settings.json", "-o", "/g/SNR/CR/rss/", "--no-coilsens", "--no-gfactor", "--no-verbose", "--matlab","--no-parallel"]
-        },     
+            "args": [
+                "-j",
+                "mroptimum/collections/CR/rss_settings.json",
+                "-o",
+                "/g/SNR/CR/rss/",
+                "--no-coilsens",
+                "--no-gfactor",
+                "--no-verbose",
+                "--matlab",
+                "--parallel"
+            ]
+        },
         {
             "name": "CR B1",
             "type": "python",
@@ -122,7 +238,17 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["-j", "mroptimum/collections/CR/b1_settings.json", "-o", "/g/SNR/CR/B1/", "--coilsens", "--no-gfactor", "--no-verbose", "--matlab","--parallel"]
+            "args": [
+                "-j",
+                "mroptimum/collections/CR/b1_settings.json",
+                "-o",
+                "/g/SNR/CR/B1/",
+                "--coilsens",
+                "--no-gfactor",
+                "--no-verbose",
+                "--matlab",
+                "--parallel"
+            ]
         },
         {
             "name": "CR innerACL",
@@ -131,9 +257,18 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["-j", "mroptimum/collections/CR/sense_settings.json", "-o", "/g/SNR/CR/sense/", "--coilsens", "--gfactor", "--no-verbose", "--matlab","--parallel"]
+            "args": [
+                "-j",
+                "mroptimum/collections/CR/sense_settings.json",
+                "-o",
+                "/g/SNR/CR/sense/",
+                "--coilsens",
+                "--gfactor",
+                "--no-verbose",
+                "--matlab",
+                "--no-parallel"
+            ]
         },
-       
         {
             "name": "CR real sense",
             "type": "python",
@@ -141,8 +276,18 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["-j", "mroptimum/collections/CR/sense_real_settings.json", "-o", "/g/SNR/CR/sensereal/", "--coilsens", "--gfactor", "--no-verbose", "--matlab","--parallel"]
-        },     
+            "args": [
+                "-j",
+                "mroptimum/collections/CR/sense_real_settings.json",
+                "-o",
+                "/g/SNR/CR/sensereal/",
+                "--coilsens",
+                "--gfactor",
+                "--no-verbose",
+                "--matlab",
+                "--parallel"
+            ]
+        },
         {
             "name": "CR Grappa",
             "type": "python",
@@ -150,7 +295,17 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["-j", "mroptimum/collections/CR/grappa_settings.json", "-o", "/g/SNR/CR/grappa/", "--no-coilsens", "--no-gfactor", "--no-verbose", "--matlab","--parallel"]
+            "args": [
+                "-j",
+                "mroptimum/collections/CR/grappa_settings.json",
+                "-o",
+                "/g/SNR/CR/grappa/",
+                "--no-coilsens",
+                "--no-gfactor",
+                "--no-verbose",
+                "--matlab",
+                "--parallel"
+            ]
         },
         {
             "name": "MR RSS",
@@ -159,8 +314,18 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["-j", "mroptimum/collections/MR/rss_settings.json", "-o", "/g/SNR/MR/rss/", "--no-coilsens", "--no-gfactor", "--no-verbose", "--matlab","--parallel"]
-        },     
+            "args": [
+                "-j",
+                "mroptimum/collections/MR/rss_settings.json",
+                "-o",
+                "/g/SNR/MR/rss/",
+                "--no-coilsens",
+                "--no-gfactor",
+                "--no-verbose",
+                "--matlab",
+                "--parallel"
+            ]
+        },
         {
             "name": "MR B1",
             "type": "python",
@@ -168,7 +333,17 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["-j", "mroptimum/collections/MR/b1_settings.json", "-o", "/g/SNR/MR/B1/", "--coilsens", "--no-gfactor", "--no-verbose", "--matlab","--parallel"]
+            "args": [
+                "-j",
+                "mroptimum/collections/MR/b1_settings.json",
+                "-o",
+                "/g/SNR/MR/B1/",
+                "--coilsens",
+                "--no-gfactor",
+                "--no-verbose",
+                "--matlab",
+                "--parallel"
+            ]
         },
         {
             "name": "MR sense innerACL",
@@ -177,8 +352,18 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["-j", "mroptimum/collections/MR/sense_settings.json", "-o", "/g/SNR/MR/senseACL/", "--no-coilsens", "--no-gfactor", "--no-verbose", "--matlab","--no-parallel"]
-        },     
+            "args": [
+                "-j",
+                "mroptimum/collections/MR/sense_settings.json",
+                "-o",
+                "/g/SNR/MR/senseACL/",
+                "--coilsens",
+                "--gfactor",
+                "--no-verbose",
+                "--matlab",
+                "--parallel"
+            ]
+        },
         {
             "name": "MR grappa",
             "type": "python",
@@ -186,8 +371,18 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["-j", "mroptimum/collections/MR/grappa_settings.json", "-o", "/g/SNR/MR/grappa/", "--coilsens", "--no-gfactor", "--no-verbose", "--matlab","--parallel"]
-        },     
+            "args": [
+                "-j",
+                "mroptimum/collections/MR/grappa_settings.json",
+                "-o",
+                "/g/SNR/MR/grappa/",
+                "--coilsens",
+                "--no-gfactor",
+                "--no-verbose",
+                "--matlab",
+                "--parallel"
+            ]
+        },
         {
             "name": "MR RSS nonoise",
             "type": "python",
@@ -195,7 +390,17 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["-j", "mroptimum/collections/MR/rss_no_noise_settings.json", "-o", "/g/SNR/MR/RSSNONOISE/", "--coilsens", "--no-gfactor", "--no-verbose", "--matlab","--no-parallel"]
+            "args": [
+                "-j",
+                "mroptimum/collections/MR/rss_no_noise_settings.json",
+                "-o",
+                "/g/SNR/MR/RSSNONOISE/",
+                "--coilsens",
+                "--no-gfactor",
+                "--no-verbose",
+                "--matlab",
+                "--parallel"
+            ]
         }
     ]
 }

@@ -37,14 +37,7 @@
                     "id": 1,
                     "name": "inner",
                     "options": {
-                        "sensitivityMapSource": {
-                            "type": "file",
-                            "options": {
-                                "type": "local",
-                                "filename": "/youtpath/to/the/file.dat",
-                                "options": {}
-                            }
-                        },
+                        "mask":"espirit",
                         "sensitivityMapMethod": "inner"
                     }
                 },

@@ -84,8 +84,41 @@ python -m mroptimum.snr -j /g/as.json -o /g/_MR/ -c True -g True -v True -m True
 }
 
 }
-```
 
+```
+## MASK FIELD
+
+1. "mask":"no"
+
+1. "mask":{"method":"reference"} recon>(mean(recon)-sts)
+
+1. no field "mask" => no 
+
+1. "mask":{
+    "method":'espirit',
+    "k":8,
+    "r":24,
+    "t":0.01,
+    "c":0.995
+}
+
+1. "mask":{
+    "method":'threshold',
+    "value": 0.0001
+} 
+Sensititvity Mask = Sum Of Squres Reconstruction > mask["value"]
+
+1. "mask":{
+    "method":'percentagemean',
+    "value":
+} 
+Sensitivity Mask = Sum Of Squres Reconstruction> (np.mean(Sum OfSqures Reconstruction)*mask["value"])
+
+1. "mask":{
+    "method":'percentage',
+    "value":20
+} 
+Sensitivity Mask = Sum Of Squres Reconstruction> > (np.max(Sum Of Squres Reconstruction>)*float(mask["value"])/100.0)
 
 ## Create a Json Options file
 
@@ -124,6 +157,7 @@ a collection of json customization file can be found [here](https://github.com/c
 | 3 | Inverse G Factor|
 | 4 | G Factor|
 | >=10 |Coil Sensitivities Maps |
+| >=100 |Coil Sensitivities Mask |
 
 
 
