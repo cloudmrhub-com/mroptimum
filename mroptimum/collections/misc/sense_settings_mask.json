@@ -1,0 +1,69 @@
+{
+    "version": "v0",
+    "acquisition": 2,
+    "type": "SNR",
+    "id": 0,
+    "name": "AC",
+    "options": {
+        "reconstructor": {
+            "type": "recon",
+            "name": "Sense",
+            "id": 3,
+            "options": {
+                "noise": {
+                    "type": "file",
+                    "options": {
+                        "type": "local",
+                        "filename": "/data/PROJECTS/mroptimum/_data/noise.dat",
+                        "options": {},
+                        "multiraid": false,
+                        "vendor": "Siemens"
+                    }
+                },
+                "signal": {
+                    "type": "file",
+                    "options": {
+                        "type": "local",
+                        "filename": "/data/PROJECTS/mroptimum/_data/signal.dat",
+                        "options": {},
+                        "multiraid": false,
+                        "vendor": "Siemens"
+                    }
+                },
+                "sensitivityMap": {
+                    "type": "sensitivityMap",
+                    "id": 1,
+                    "name": "inner",
+                    "options": {
+                        "sensitivityMapMethod": "inner",
+                        "mask": {
+							"method": "upload",
+							"file": {
+								"type": "file",
+								"id": 9,
+								"options": {
+									"type": "s3",
+									"filename": "label1.nii.gz",
+									"options": {},
+									"bucket": "mrod",
+									"key": "573534e4-df75-404d-b506-db8eed58f18d_label1.nii",
+									"vendor": "ITK"
+								}
+							}
+						}
+                    
+                }
+            },
+                "decimate": true,
+                "accelerations": [
+                    1,
+                    2
+                ],
+                "acl": [
+                    null,
+                    24
+                ]
+            }
+        }
+    }
+}

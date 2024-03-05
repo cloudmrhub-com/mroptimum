@@ -10,7 +10,7 @@ include = ["**/*.py"]
 
 [project]
 name = "mroptimum"
-version = "0.9.9.4.2"
+version = "0.9.9.5"
 license = "MIT"
 description = "SNR and Recon"
 authors = [
